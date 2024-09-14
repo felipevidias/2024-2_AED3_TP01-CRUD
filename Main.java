@@ -38,30 +38,36 @@ public class Main {
             id3 = arqFilme.create(f3);
             f3.setId(id3);
 
-            System.out.println(arqFilme.read(id3));
-            System.out.println(arqFilme.read(id1));
+            // Mostra filmes inseridos
+            System.out.println("Filme inserido com ID \n" + id3 + ": " + arqFilme.read(id3));
+            System.out.println("Filme inserido com ID \n" + id1 + ": " + arqFilme.read(id1));
 
             // Altera um filme e exibe o resultado
+            System.out.println("Atualizando o filme com ID " + id2 + ":");
+            Filme filmeAntigo = arqFilme.read(id2);
+            System.out.println("Filme antigo: \n" + filmeAntigo);
             f2.setTitulo("Interestelar");
             arqFilme.update(f2);
-            System.out.println(arqFilme.read(id2));
+            System.out.println("Filme atualizado: \n" + arqFilme.read(id2));
 
             // Altera um filme para um nome diferente e exibe o resultado
+            System.out.println("Atualizando o filme com ID " + id1 + ":");
+            filmeAntigo = arqFilme.read(id1);
+            System.out.println("Filme antigo: \n" + filmeAntigo);
             f1.setTitulo("Clube da Luta");
             arqFilme.update(f1);
-            System.out.println(arqFilme.read(id1));
+            System.out.println("Filme atualizado: \n" + arqFilme.read(id1));
 
             // Excluir um filme e mostra que não existe mais
-            arqFilme.delete(id3);
-            Filme f = arqFilme.read(id3);
-            if (f == null)
-                System.out.println("Filme excluído");
-            else
-                System.out.println(f.getTitulo());
+            System.out.println("Excluindo o filme com ID " + id3 + ":");
+            filmeAntigo = arqFilme.read(id3);
+            if (arqFilme.delete(id3)) {
+                System.out.println("Filme excluído: \n" + filmeAntigo);
+            } else {
+                System.out.println("Falha ao excluir o filme com ID " + id3);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
 }
