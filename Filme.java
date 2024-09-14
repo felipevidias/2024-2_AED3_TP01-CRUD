@@ -4,11 +4,6 @@ import java.io.DataOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
-/* Used to store recorded Movies from the Arquivo database
- * Contains:
- *   id: Attribute given only by Arquivo to indicate its position
- *   titulo: Title of the movie
- */
 public class Filme implements Registro {
     private int id;
 
