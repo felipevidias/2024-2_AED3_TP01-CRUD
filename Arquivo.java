@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Arquivo<T extends Registro> {
-    // Atributos da Classe Genérica Arquivo
+
     private T objeto;
     public Constructor<T> construtor;
     private File diretorio;
     String fileName;
     final int fimCabecalho = 4;
-    HashExtensivel<ParIDEndereco> indiceDireto;
+    HashExtensivel<IDEndereco> indiceDireto;
 
     // Construtor
     public Arquivo(Constructor<T> construtor, String fN) throws Exception {
@@ -26,7 +26,7 @@ public class Arquivo<T extends Registro> {
         raf.writeInt(0);
         raf.close();
         indiceDireto = new HashExtensivel<>(
-                ParIDEndereco.class.getConstructor(),
+                IDEndereco.class.getConstructor(),
                 4,
                 "dados/" + fN + ".hash_d.db",
                 "dados/" + fN + ".hash_c.db");
@@ -57,7 +57,7 @@ public class Arquivo<T extends Registro> {
         raf.close();
 
         // Atualizar hash extensivel com id / endereco
-        indiceDireto.create(new ParIDEndereco(proxId, endereco));
+        indiceDireto.create(new IDEndereco(proxId, endereco));
 
         return proxId;
     }
@@ -65,7 +65,7 @@ public class Arquivo<T extends Registro> {
     // Método Read
     public T read(int id) {
         try (RandomAccessFile raf = new RandomAccessFile(this.fileName, "rw")) {
-            ParIDEndereco pid = indiceDireto.read(id);
+            IDEndereco pid = indiceDireto.read(id);
 
             if (pid != null) {
                 raf.seek(pid.getEndereco());
@@ -97,7 +97,7 @@ public class Arquivo<T extends Registro> {
         RandomAccessFile raf = new RandomAccessFile(this.fileName, "rw");
         boolean success = false;
 
-        ParIDEndereco pie = indiceDireto.read(id);
+        IDEndereco pie = indiceDireto.read(id);
         if (pie != null) {
             // Ler metadados do arquivo
             raf.seek(pie.getEndereco());
@@ -118,7 +118,7 @@ public class Arquivo<T extends Registro> {
         RandomAccessFile raf = new RandomAccessFile(this.fileName, "rw");
         boolean success = false;
 
-        ParIDEndereco pie = indiceDireto.read(novoObjeto.getId());
+        IDEndereco pie = indiceDireto.read(novoObjeto.getId());
         if (pie != null) {
             // Ler metadados
             raf.seek(pie.getEndereco());
@@ -145,7 +145,7 @@ public class Arquivo<T extends Registro> {
                     raf.write(array);
 
                     // Atualizar indice
-                    indiceDireto.update(new ParIDEndereco(novoObjeto.getId(), novoEndereco));
+                    indiceDireto.update(new IDEndereco(novoObjeto.getId(), novoEndereco));
                 }
             }
         }
