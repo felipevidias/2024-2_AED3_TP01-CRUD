@@ -25,9 +25,8 @@ Descrição: Inicializa o arquivo de dados e o índice hash extensível. Cria o 
 
 create(T objeto):
 
-java
-Copiar código
-public int create(T objeto) throws Exception
+```java
+  public int create(T objeto) throws Exception
 Descrição: Cria um novo registro no arquivo de dados. Atribui um ID ao objeto, escreve o objeto no final do arquivo e atualiza o índice com o ID e o endereço do registro.
 read(int id):
 
