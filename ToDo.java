@@ -4,15 +4,6 @@ import java.io.DataOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 
-/* Used to store recorded Tasks from the Arquivo database
- * Contains:
- *   id: Attribute given only by Arquivo to indicate its position
- *   nome: Name of the task
- *   inicio: Start date of the task
- *   fim: End date of the task
- *   status: Status of the task
- *   prioridade: Priority of the task
- */
 public class Tarefa implements Registro {
     private int id;
 
