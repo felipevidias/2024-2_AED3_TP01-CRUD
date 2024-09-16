@@ -27,27 +27,27 @@ create(T objeto):
 
 ```java
   public int create(T objeto) throws Exception
+```
 Descrição: Cria um novo registro no arquivo de dados. Atribui um ID ao objeto, escreve o objeto no final do arquivo e atualiza o índice com o ID e o endereço do registro.
 read(int id):
-```
 ```java
 
 public T read(int id)
+```
 Descrição: Lê um registro do arquivo com base no ID. Usa o índice para encontrar o endereço do registro e então lê o objeto do arquivo.
 delete(int id):
-```
 ```java
 
 public boolean delete(int id) throws Exception
+```
 Descrição: Marca um registro como excluído (usando uma "lapide"). O registro não é removido fisicamente, mas é marcado como inativo.
 update(T novoObjeto):
-```
 ```java
 
 public boolean update(T novoObjeto) throws Exception
+```
 Descrição: Atualiza um registro existente. Se o novo registro cabe no espaço do registro antigo, ele é sobrescrito. Caso contrário, o registro antigo é marcado como excluído e um novo registro é criado no final do arquivo.
 listAll():
-```
 ```java
 
 public List<T> listAll()
