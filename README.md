@@ -1,4 +1,4 @@
-# 2024-2_AED3_TP01-CRUD
+# TP01-CRUD
 
 # Relatório de Desenvolvimento do TP
 ## Ana Cristina - Felipe Vilhena - Kenia Teixeira - Lucas Gabriel
