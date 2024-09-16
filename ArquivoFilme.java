@@ -1,8 +1,8 @@
 import java.lang.reflect.Constructor;
 
-public class ArquivoFilme extends Arquivo<Filme> {
+public class ArquivoToDo extends Arquivo<ToDo> {
 
-    public ArquivoFilme(Constructor<Filme> construtor, String name) throws Exception {
+    public ArquivoFilme(Constructor<ToDo> construtor, String name) throws Exception {
         super(construtor, name);
     }
 }
