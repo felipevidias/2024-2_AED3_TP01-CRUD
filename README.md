@@ -33,51 +33,94 @@ A classe `Tarefa` representa as tarefas que serão manipuladas no sistema. Cada 
 - **`byte[] toByteArray()`**: Converte a tarefa para um array de bytes para fins de armazenamento.
 - **`void fromByteArray(byte[] array)`**: Converte um array de bytes em um objeto `Tarefa`.
 
+---
+
+### Interface `RegHashExtensivel<T>`
+
+A interface `RegHashExtensivel<T>` define os métodos que os objetos a serem incluídos na tabela hash extensível devem implementar.
+
+#### Métodos:
+- **`int hashCode()`**: Retorna a chave numérica que será usada no diretório hash.
+- **`short size()`**: Retorna o tamanho fixo do registro.
+- **`byte[] toByteArray()`**: Converte o objeto em um vetor de bytes para armazenamento.
+- **`void fromByteArray(byte[] ba)`**: Constrói o objeto a partir de um vetor de bytes.
+
+---
+
+### Interface `Registro`
+
+A interface `Registro` define métodos básicos que todos os registros devem implementar.
+
+#### Métodos:
+- **`void setId(int id)`**: Define o ID do registro.
+- **`int getId()`**: Retorna o ID do registro.
+- **`byte[] toByteArray()`**: Converte o registro para um array de bytes.
+- **`void fromByteArray(byte[] array)`**: Reconstrói o registro a partir de um array de bytes.
+
+---
+
 ### Classe `Arquivo<T>`
 
-A classe `Arquivo<T>` é responsável por gerenciar a persistência de objetos do tipo `T`, que deve implementar a interface `Registro`. Utiliza um arquivo de dados e um índice hash extensível para armazenar e recuperar objetos de forma eficiente.
+A classe `Arquivo<T>` é responsável por gerenciar a persistência de objetos do tipo `T`, que devem implementar a interface `Registro`. Ela utiliza um arquivo de dados e um índice hash extensível para armazenar e recuperar objetos de forma eficiente.
 
 #### Atributos:
-- **`T objeto`**: Referência ao objeto genérico que será manipulado.
-- **`Constructor<T> construtor`**: Construtor utilizado para criar instâncias do tipo `T`.
+- **`Constructor<T> construtor`**: Construtor usado para criar instâncias do tipo `T`.
 - **`File diretorio`**: Diretório onde o arquivo de dados é armazenado.
 - **`String fileName`**: Nome do arquivo de dados.
 - **`final int fimCabecalho`**: Posição final do cabeçalho no arquivo (4 bytes).
 - **`HashExtensivel<IDEndereco> indiceDireto`**: Índice direto utilizando uma tabela hash extensível.
 
 #### Métodos:
-- **`Arquivo(Constructor<T> construtor, String fN)`**: Inicializa o arquivo de dados e o índice hash extensível. Cria o diretório de dados se não existir e inicializa o arquivo com um cabeçalho contendo o ID inicial.
-- **`int create(T objeto)`**: Cria um novo registro no arquivo de dados. Atribui um ID ao objeto, escreve o objeto no final do arquivo e atualiza o índice com o ID e o endereço do registro.
-- **`T read(int id)`**: Lê um registro do arquivo com base no ID. Usa o índice para encontrar o endereço do registro e então lê o objeto do arquivo.
-- **`boolean delete(int id)`**: Marca um registro como excluído (usando uma "lápide"). O registro não é removido fisicamente, mas é marcado como inativo.
-- **`boolean update(T novoObjeto)`**: Atualiza um registro existente. Se o novo registro cabe no espaço do registro antigo, ele é sobrescrito. Caso contrário, o registro antigo é marcado como excluído e um novo registro é criado no final do arquivo.
-- **`List<T> listAll()`**: Lista todos os registros ativos no arquivo. Pula registros marcados como excluídos e lê os registros válidos.
+- **`public Arquivo(Constructor<T> construtor, String fN)`**: Inicializa o arquivo de dados e o índice hash extensível.
+- **`public int create(T objeto)`**: Cria um novo registro no arquivo de dados.
+- **`public T read(int id)`**: Lê um registro do arquivo com base no ID.
+- **`public boolean delete(int id)`**: Marca um registro como excluído.
+- **`public boolean update(T novoObjeto)`**: Atualiza um registro existente.
+- **`public List<T> listAll()`**: Lista todos os registros ativos no arquivo.
+
+---
 
 ### Classe `Main`
 
-A classe `Main` contém o ponto de entrada do programa. Ela cria instâncias de tarefas e utiliza a classe `Arquivo` para realizar operações de criação, leitura, atualização e exclusão de tarefas.
+A classe `Main` contém o método principal que inicializa o sistema de CRUD de tarefas e testa as funcionalidades de criação, leitura, atualização e exclusão.
 
 #### Atributos:
-- **`Arquivo<ToDo> arqTarefa`**: Instância da classe `Arquivo` usada para armazenar e manipular tarefas.
+- **`private static Arquivo<ToDo> arqTarefa`**: Arquivo de tarefas utilizado no sistema.
 
 #### Métodos:
-- **`public static void main(String[] args)`**: Método principal do programa. Cria algumas tarefas de exemplo, realiza operações de CRUD (Create, Read, Update, Delete) e exibe os resultados no console.
+- **`public static void main(String[] args)`**: Método principal que executa o CRUD de tarefas.
+  
+#### Passos no `main`:
+1. Inicializa datas de exemplo e cria tarefas.
+2. Exclui arquivos antigos se existirem para criar um novo.
+3. Insere as tarefas no arquivo e armazena os IDs.
+4. Exibe as tarefas inseridas.
+5. Atualiza algumas tarefas e mostra o resultado.
+6. Exclui uma tarefa e confirma a exclusão.
 
-## Experiência de Desenvolvimento
+---
 
-### Implementação dos Requisitos
-Sim, todos os requisitos foram implementados com sucesso. O índice direto é gerenciado usando uma tabela hash extensível, e todas as operações básicas (inclusão, leitura, atualização e exclusão) foram implementadas conforme solicitado.
+### Experiência de Desenvolvimento
 
-### Operação Mais Difícil
-A operação de atualização foi a mais desafiadora. Lidar com registros que podem ter tamanhos diferentes e garantir que o espaço em disco seja gerenciado corretamente apresentou complexidade adicional. Isso exigiu a marcação de registros antigos como excluídos e a criação de novos registros no final do arquivo, se necessário.
+#### Implementação dos Requisitos:
+Todos os requisitos foram implementados com sucesso. O índice direto é gerenciado usando uma tabela hash extensível, e todas as operações básicas (inclusão, leitura, atualização e exclusão) foram implementadas conforme solicitado.
 
-### Desafios Enfrentados
-- **Gerenciamento do Espaço**: A atualização de registros grandes que não cabem no espaço originalmente alocado foi um desafio, exigindo a gestão correta do espaço no arquivo e o ajuste do índice.
-- **Manutenção da Integridade dos Dados**: Manter a consistência do índice direto após operações de inserção, exclusão e atualização foi crucial para garantir que os dados fossem corretamente recuperados e manipulados.
+#### Operação Mais Difícil:
+A operação de atualização foi a mais desafiadora, já que lidar com registros de tamanhos diferentes e gerenciar o espaço em disco corretamente apresentou complexidade adicional.
 
-## Resultados
+#### Desafios Enfrentados:
+- **Gerenciamento do Espaço**: A atualização de registros grandes que não cabem no espaço original foi um desafio, exigindo a marcação de registros antigos como excluídos e a criação de novos registros no final do arquivo, se necessário.
+- **Manutenção da Integridade dos Dados**: Garantir a consistência do índice após operações de inserção, exclusão e atualização foi crucial.
 
-Os resultados foram satisfatórios. O sistema de gerenciamento de registros funciona conforme o esperado, com o índice hash extensível proporcionando acesso eficiente e operações básicas funcionando corretamente.
+---
+
+### Resultados
+
+- O sistema de gerenciamento de registros funciona conforme o esperado.
+- O índice hash extensível proporciona acesso eficiente e todas as operações básicas funcionam corretamente.
+- O trabalho é original e completo.
+
+---
 
 ## Respostas para Questões
 - O trabalho possui um índice direto implementado com a tabela hash extensível? **Sim**
