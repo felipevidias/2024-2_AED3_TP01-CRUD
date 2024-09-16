@@ -7,7 +7,7 @@ import java.io.DataInputStream;
 public class Tarefa implements Registro {
     private int id;
 
-    // Atributos da classe Tarefa
+    // Atributos da classe ToDo
     private String nome;
     private LocalDate inicio;
     private LocalDate fim;
@@ -102,7 +102,7 @@ public class Tarefa implements Registro {
     }
 
     // Construtores
-    public Tarefa(String nome, LocalDate inicio, LocalDate fim, byte status, byte prioridade) {
+    public ToDo(String nome, LocalDate inicio, LocalDate fim, byte status, byte prioridade) {
         this.nome = nome;
         this.inicio = inicio;
         this.fim = fim;
@@ -110,7 +110,7 @@ public class Tarefa implements Registro {
         this.prioridade = prioridade;
     }
 
-    public Tarefa() {
+    public ToDo() {
         this.id = -1;
         this.inicio = null;
         this.fim = null;
