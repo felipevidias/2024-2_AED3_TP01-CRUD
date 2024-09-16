@@ -4,67 +4,70 @@ import java.time.LocalDate;
 public class Main {
 
     // Arquivo declarado fora de main() para ser poder ser usado por outros métodos
-    private static Arquivo<Filme> arqFilme;
+    private static Arquivo<ToDo> arqTarefa;
 
     public static void main(String[] args) {
-        LocalDate lancamento1, lancamento2;
-        lancamento1 = LocalDate.of(1994, 10, 14); // Data de lançamento de Pulp Fiction
-        lancamento2 = LocalDate.of(2010, 7, 16); // Data de lançamento de A Origem
+        LocalDate inicio1, fim1, inicio2, fim2, inicio3, fim3;
+        inicio1 = LocalDate.of(2024, 1, 15); // Data de início para Tarefa 1
+        fim1 = LocalDate.of(2024, 1, 20); // Data de fim para Tarefa 1
+        inicio2 = LocalDate.of(2024, 2, 5); // Data de início para Tarefa 2
+        fim2 = LocalDate.of(2024, 2, 10); // Data de fim para Tarefa 2
+        inicio3 = LocalDate.of(2024, 3, 1); // Data de início para Tarefa 3
+        fim3 = LocalDate.of(2024, 3, 5); // Data de fim para Tarefa 3
 
-        // Filmes de exemplo
-        Filme f1 = new Filme("Pulp Fiction", lancamento1, lancamento1, (byte) 18, (byte) 5);
-        Filme f2 = new Filme("A Origem", lancamento2, lancamento2, (byte) 12, (byte) 5);
-        Filme f3 = new Filme("O Poderoso Chefão", LocalDate.of(1972, 3, 24), LocalDate.of(1972, 3, 24), (byte) 18,
-                (byte) 5);
+        // Tarefas de exemplo
+        Tarefa t1 = new Tarefa("Revisar relatório", inicio1, fim1, (byte) 1, (byte) 3);
+        Tarefa t2 = new Tarefa("Preparar apresentação", inicio2, fim2, (byte) 2, (byte) 2);
+        Tarefa t3 = new Tarefa("Enviar e-mail", inicio3, fim3, (byte) 1, (byte) 1);
         int id1, id2, id3;
 
         try {
-            File arq = new File("dados/filmes.db");
+            File arq = new File("dados/tarefas.db");
             if (arq.exists()) {
                 arq.delete();
-                File hashDirectory = new File("dados/filmes.hash_d.db");
+                File hashDirectory = new File("dados/tarefas.hash_d.db");
                 hashDirectory.delete();
-                File hashBuckets = new File("dados/filmes.hash_c.db");
+                File hashBuckets = new File("dados/tarefas.hash_c.db");
                 hashBuckets.delete();
             }
 
-            arqFilme = new Arquivo<Filme>(Filme.class.getConstructor(), "filmes");
+            arqTarefa = new Arquivo<Tarefa>(Tarefa.class.getConstructor(), "tarefas");
 
-            // Insere os três filmes
-            id1 = arqFilme.create(f1);
-            f1.setId(id1);
-            id2 = arqFilme.create(f2);
-            f2.setId(id2);
-            id3 = arqFilme.create(f3);
-            f3.setId(id3);
+            // Insere as três tarefas
+            id1 = arqTarefa.create(t1);
+            t1.setId(id1);
+            id2 = arqTarefa.create(t2);
+            t2.setId(id2);
+            id3 = arqTarefa.create(t3);
+            t3.setId(id3);
 
-            // Mostra filmes inseridos
-            System.out.println("Filme inserido com ID \n" + id3 + ": " + arqFilme.read(id3));
-            System.out.println("Filme inserido com ID \n" + id1 + ": " + arqFilme.read(id1));
+            // Mostra tarefas inseridas
+            System.out.println("Tarefa inserida com ID \n" + id3 + ": " + arqTarefa.read(id3));
+            System.out.println("Tarefa inserida com ID \n" + id1 + ": " + arqTarefa.read(id1));
 
-            // Altera um filme e exibe o resultado
-            System.out.println("Atualizando o filme com ID " + id2 + ":");
-            Filme filmeAntigo = arqFilme.read(id2);
-            System.out.println("Filme antigo: \n" + filmeAntigo);
-            f2.setTitulo("Interestelar");
-            arqFilme.update(f2);
-            System.out.println("Filme atualizado: \n" + arqFilme.read(id2));
+            // Altera uma tarefa e exibe o resultado
+            System.out.println("Atualizando a tarefa com ID " + id2 + ":");
+            Tarefa tarefaAntiga = arqTarefa.read(id2);
+            System.out.println("Tarefa antiga: \n" + tarefaAntiga);
+            t2.setNome("Preparar slides");
+            arqTarefa.update(t2);
+            System.out.println("Tarefa atualizada: \n" + arqTarefa.read(id2));
 
-            // Altera um filme para um nome diferente e exibe o resultado
-            System.out.println("Atualizando o filme com ID " + id1 + ":");
-            filmeAntigo = arqFilme.read(id1);
-            System.out.println("Filme antigo: \n" + filmeAntigo);
-            f1.setTitulo("Clube da Luta");
-            arqFilme.update(f1);
-            System.out.println("Filme atualizado: \n" + arqFilme.read(id1));
+            // Altera uma tarefa para um nome diferente e exibe o resultado
+            System.out.println("Atualizando a tarefa com ID " + id1 + ":");
+            tarefaAntiga = arqTarefa.read(id1);
+            System.out.println("Tarefa antiga: \n" + tarefaAntiga);
+            t1.setNome("Revisar e corrigir relatório");
+            arqTarefa.update(t1);
+            System.out.println("Tarefa atualizada: \n" + arqTarefa.read(id1));
 
-            // Excluir um filme e mostra que não existe mais
-            System.out.println("Excluindo o filme com ID " + id3 + ":");
-            filmeAntigo = arqFilme.read(id3);
-            if (arqFilme.delete(id3)) {
-                System.out.println("Filme excluído: \n" + filmeAntigo);
+            // Excluir uma tarefa e mostra que não existe mais
+            System.out.println("Excluindo a tarefa com ID " + id3 + ":");
+            tarefaAntiga = arqTarefa.read(id3);
+            if (arqTarefa.delete(id3)) {
+                System.out.println("Tarefa excluída: \n" + tarefaAntiga);
             } else {
-                System.out.println("Falha ao excluir o filme com ID " + id3);
+                System.out.println("Falha ao excluir a tarefa com ID " + id3);
             }
         } catch (Exception e) {
             e.printStackTrace();
