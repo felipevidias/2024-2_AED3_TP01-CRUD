@@ -118,7 +118,6 @@ A operação de atualização foi a mais desafiadora, já que lidar com registro
 
 - O sistema de gerenciamento de registros funciona conforme o esperado.
 - O índice hash extensível proporciona acesso eficiente e todas as operações básicas funcionam corretamente.
-- O trabalho é original e completo.
 
 ---
 
@@ -130,4 +129,4 @@ A operação de atualização foi a mais desafiadora, já que lidar com registro
 - A operação de exclusão marca o registro como excluído e o remove do índice direto? **Sim**
 - O trabalho está funcionando corretamente? **Sim**
 - O trabalho está completo? **Sim**
-- O trabalho é original e não a cópia de um trabalho de outro grupo? **Sim, é original.**
+- O trabalho é original e não a cópia de um trabalho de outro grupo? **Sim, é original, menos a parte de hash extensível do Prof.Marcos Kutova.**
