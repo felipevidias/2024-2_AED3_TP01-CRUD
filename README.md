@@ -66,28 +66,20 @@ Manutenção da Integridade dos Dados: Manter a consistência do índice direto 
 Resultados
 Os resultados foram satisfatórios. O sistema de gerenciamento de registros funciona conforme o esperado, com o índice hash extensível proporcionando acesso eficiente e operações básicas funcionando corretamente.
 
-Checklist de Requisitos
+
 O trabalho possui um índice direto implementado com a tabela hash extensível?
-
-Sim
+Sim,
 A operação de inclusão insere um novo registro no fim do arquivo e no índice e retorna o ID desse registro?
-
 Sim
 A operação de busca retorna os dados do registro, após localizá-lo por meio do índice direto?
-
 Sim
 A operação de alteração altera os dados do registro e trata corretamente as reduções e aumentos no espaço do registro?
-
 Sim
 A operação de exclusão marca o registro como excluído e o remove do índice direto?
-
 Sim
 O trabalho está funcionando corretamente?
-
 Sim
 O trabalho está completo?
-
 Sim
 O trabalho é original e não a cópia de um trabalho de outro grupo?
-
-Sim
+Sim, é original.
