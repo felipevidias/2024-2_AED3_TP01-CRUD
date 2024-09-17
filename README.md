@@ -31,7 +31,7 @@ A classe `To Do` representa as tarefas que serão manipuladas no sistema. Cada t
 - **`Byte getStatus()`**: Retorna o status da tarefa.
 - **`Byte getPrioridade()`**: Retorna a prioridade da tarefa.
 - **`byte[] toByteArray()`**: Converte a tarefa para um array de bytes para fins de armazenamento.
-- **`void fromByteArray(byte[] array)`**: Converte um array de bytes em um objeto `Tarefa`.
+- **`void fromByteArray(byte[] array)`**: Converte um array de bytes em um objeto `ToDo`.
 
 ---
 
