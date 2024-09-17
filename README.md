@@ -5,9 +5,9 @@
 
 ## Descrição das Classes e Métodos
 
-### Classe `Tarefa`
+### Classe `To Do`
 
-A classe `Tarefa` representa as tarefas que serão manipuladas no sistema. Cada tarefa tem atributos como nome, data de início, data de fim, status e prioridade.
+A classe `To Do` representa as tarefas que serão manipuladas no sistema. Cada tarefa tem atributos como nome, data de início, data de fim, status e prioridade.
 
 #### Atributos:
 - **`int id`**: Identificador único da tarefa.
