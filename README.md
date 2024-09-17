@@ -129,4 +129,4 @@ A operação de atualização foi a mais desafiadora, já que lidar com registro
 - A operação de exclusão marca o registro como excluído e o remove do índice direto? **Sim**
 - O trabalho está funcionando corretamente? **Sim**
 - O trabalho está completo? **Sim**
-- O trabalho é original e não a cópia de um trabalho de outro grupo? **Sim, é original, menos a parte de hash extensível,foi pega do Prof.Marcos Kutova.**
+- O trabalho é original e não a cópia de um trabalho de outro grupo? **Sim, é original, menos a parte de hash extensível,foi pega do Prof. Marcos Kutova.**
